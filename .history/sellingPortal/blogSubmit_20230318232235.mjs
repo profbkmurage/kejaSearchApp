@@ -1,13 +1,13 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-import { getFirestore, addDoc, collection, getDocs, query, orderBy, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { getFirestore, addDoc, collection, getDocs, query, orderBy, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAw0uxlFLIc7iaUPSDHw6KVJmjaML1Amzk",
-    authDomain: "kejasearchapp.firebaseapp.com",
-    projectId: "kejasearchapp",
-    storageBucket: "kejasearchapp.appspot.com",
-    messagingSenderId: "1018711007275",
-    appId: "1:1018711007275:web:ec80a94353c90c3ed58a6e"
+    apiKey: "AIzaSyCAsNHhT9-phSsWDrykUCwaGkiH-G7HPVE",
+    authDomain: "agro-biashara2023.firebaseapp.com",
+    projectId: "agro-biashara2023",
+    storageBucket: "agro-biashara2023.appspot.com",
+    messagingSenderId: "1072107286840",
+    appId: "1:1072107286840:web:1aa3b885ba0a5a1b1e51cd"
   };
 
 // Initialize Firebase
@@ -16,7 +16,7 @@ const db = getFirestore(app)
 
 
 window.addEventListener('load', async function() {
-    const blogRef = collection(db, 'kejasearchBlogs')
+    const blogRef = collection(db, 'agroBiasharaBlogs')
     const blogData = await getDocs(query(blogRef, orderBy('createdAt', 'desc')))
     const blogs = blogData.docs.map(doc => {
         return {...doc.data(), id: doc.id}
@@ -53,7 +53,7 @@ $('#blogSubmit').addEventListener('submit', async function(e){
 
     $('#blog').textContent = 'submission in progress...'
     // posting to db
-    await addDoc(collection(db, 'kejasearchBlogs'), { email,phoneNumber, name, profession, img, titlle, content, createdAt })
+    await addDoc(collection(db, 'agroBiasharaBlogs'), { email,phoneNumber, name, profession, img, titlle, content, createdAt })
     $('#blog').textContent = 'submit'
     alert('product created successfully')
 
@@ -72,7 +72,7 @@ $('input#img').addEventListener('change', function(e){
     $('img#preview').src = e.target.value
 })
 
-onSnapshot(collection(db, 'kejasearchBlogs'), function (data) {
+onSnapshot(collection(db, 'agroBiasharaBlogs'), function (data) {
     const blogs = data.docs.map((doc) => {
         return {...doc.data(), id: doc.id}
     })

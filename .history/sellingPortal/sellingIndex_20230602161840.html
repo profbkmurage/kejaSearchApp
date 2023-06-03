@@ -1,6 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <!-- gallery style -->
+<style>
+    /* gallery part */
+.gallery-container{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+.fileUpload{
+    height: auto;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg,blue ,red);
+    cursor: pointer;
+}
+.uploadBtn{
+    padding: 1.2rem 1.4rem;
+    color: white;
+    background: rgb(12, 70, 179);
+    border: none;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.bar{
+    height: 3.2rem;
+    width:31.5rem;
+    background: #a28e8e;
+    margin-bottom: 0.8rem;
+}
+
+.progress{
+    background: linear-gradient(12deg, red, blue);
+    height: 100%;
+    width: 0%;
+}
+.uploadPercentage{
+    font-size: 1.4rem;
+}
+@media (max-width: 768px) {    
+    .fileUpload{
+        height: 3rem;
+    }
+    .uploadBtn{
+        padding: 1.2rem 1.4rem;
+        color: white;
+        background: rgb(12, 70, 179);
+        border: none;
+        font-size: 0.8rem;
+        font-weight: 300;
+        cursor: pointer;
+        margin: 2rem;
+
+    }.bar{
+        height:2.7rem;
+        width:20.5rem;
+        background: #a28e8e;
+}
+}
+</style>
+    <!-- <!-gallery end-  -->
 <head>
     <meta charset="utf-8">
     <title>KejaSearch || Welcome</title>
@@ -75,10 +147,10 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link text-light btn-outline-success">Home</a>
-                            <a href="blogs.html" class="nav-item nav-link text-light btn-outline-success">Blogs</a>
-                            <a href="detail.html" class="nav-item nav-link text-light btn-outline-success">Services</a>
-                            <a href="contact.html" class="nav-item nav-link text-light btn-outline-success">Contact us</a>
+                            <a href="../index.html" class="nav-item nav-link text-light btn-outline-success">Home</a>
+                            <a href="../blogs.html" class="nav-item nav-link text-light btn-outline-success">Blogs</a>
+                            <a href="../detail.html" class="nav-item nav-link text-light btn-outline-success">Services</a>
+                            <a href="../contact.html" class="nav-item nav-link text-light btn-outline-success">Contact us</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
@@ -113,12 +185,25 @@
 
     <!-- Contact Start -->
     <div class="container-fluid">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">submit your blog here</span></h2>
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Upload a house</span></h2>
         <div class="row px-xl-5">
-            <div class="col-lg-7 mb-5">
+            <div class="col-lg-12 mb-5">
                 <div class="contact-form bg-light p-30">
                     <div id="success"></div>
-                    <form name="bloger" id="blogSubmit" novalidate="novalidate">
+                    <!-- get image from file -->
+                    <div class="gallery-container">
+                            
+                        <span class="fileText"></span>
+                        <input type="file" name="image" id="fileInp" class="fileUpload" required accept="image/png, image/jpg, image/jpeg">
+                        <button  class="uploadBtn" >upload Image</button>
+                
+                        <div class="bar">
+                            <div class="progress"> </div>
+                        </div>
+                        <div class="uploadPercentage">0%</div>
+                    </div>
+                        <!-- image end -->
+                    <form  id="sellingForm" novalidate="novalidate">
                         <div class="control-group">
                             <input type="text" class="form-control" id="name" placeholder="Your Name"
                                 required="required" data-validation-required-message="Please enter your name" />
@@ -135,47 +220,48 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="text" class="form-control" id="profession" placeholder="Your profession"
-                                required="required" data-validation-required-message="Please enter Your profession" />
+                            <select class="form-control" name="category" id="category" placeholder="product-name"
+                                required="required" data-validation-required-message="Please enter a product-name">
+                                <option value="">--selectcartegory--</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="House">House</option>
+                                <option value="Rentals">Rentals</option>
+                                <option value="Plots">Plots</option>
+                                <option value="Vacant-Room">Vacant-Room</option>
+                            </select>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="url" class="form-control" id="img" placeholder="image url for your blog"
-                                required="required" data-validation-required-message="Please enter a image url" />
+                            <input type="text" class="form-control" id="price" placeholder="price per unit"
+                                required="required" data-validation-required-message="Please enter a price" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="text" class="form-control" id="titlle" placeholder="Title of your blog in capital letters"
-                                required="required" data-validation-required-message="Please enter a title" />
+                            <input type="text" class="form-control" id="location" placeholder="location of your product"
+                                required="required" data-validation-required-message="Please enter a location" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <textarea class="form-control"  id="content" placeholder="content"
-                                required="required"
-                                data-validation-required-message="Please enter your content"></textarea>
+                            <textarea type="text" class="form-control" id="description" placeholder="description of your product"
+                                required="required" data-validation-required-message="Please enter a description" cols="30" rows="10"> </textarea> 
                             <p class="help-block text-danger"></p>
-                        </div>                        
+                        </div>
                         <div>
-                        <button class="btn-primary py-2 px-4" type="submit"  id="blog">Send Message</button>
+                            <button class="text-primary py-2 px-4" type="submit" id="productSale">sell Product</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="col-lg-5 mb-5">
-                <div id="blogData" class="bg-light p-30 mb-30">
+            <div class="col-lg-7 mb-5">
+                <div class="bg-light p-30 mb-30">
+                    <div id="products">
 
-
-                </div>
-                <div class="bg-light p-30 mb-3">
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Nairobi, Kenya</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>hello.agrobiashara@gmail.com</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+254791214033</p>
-                </div>
+                    </div>
             </div>
         </div>
     </div>
     <!-- Contact End -->
-
+<textarea name="" id="" ></textarea>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-primary text-secondary mt-5 pt-5">
@@ -235,19 +321,15 @@
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <!-- <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a> -->
 
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="lib/easing/easing.min.js"></script> -->
-    <!-- <script src="lib/owlcarousel/owl.carousel.min.js"></script> -->
-    <script src="./blogSubmit.mjs" type="module"></script>
-
-    <!-- Contact Javascript File -->
-
-    <!-- Template Javascript -->
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="./selling.mjs"  type="module"></script>
 </body>
 
 </html>

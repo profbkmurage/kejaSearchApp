@@ -1,14 +1,14 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-import { getFirestore, addDoc, collection, getDocs, query, orderBy, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
-import { getStorage, ref as sref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { getFirestore, addDoc, collection, getDocs, query, orderBy, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+import { getStorage, ref as sref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-storage.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAw0uxlFLIc7iaUPSDHw6KVJmjaML1Amzk",
-    authDomain: "kejasearchapp.firebaseapp.com",
-    projectId: "kejasearchapp",
-    storageBucket: "kejasearchapp.appspot.com",
-    messagingSenderId: "1018711007275",
-    appId: "1:1018711007275:web:ec80a94353c90c3ed58a6e"
+    apiKey: "AIzaSyCAsNHhT9-phSsWDrykUCwaGkiH-G7HPVE",
+    authDomain: "agro-biashara2023.firebaseapp.com",
+    projectId: "agro-biashara2023",
+    storageBucket: "agro-biashara2023.appspot.com",
+    messagingSenderId: "1072107286840",
+    appId: "1:1072107286840:web:1aa3b885ba0a5a1b1e51cd"
   };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -18,7 +18,7 @@ const db = getFirestore(app)
 
 
 window.addEventListener('load', async function() {
-    const blogRef = collection(db, 'kejasearchproducts')
+    const blogRef = collection(db, 'agroBiasharaProductSale')
     const blogData = await getDocs(query(blogRef, orderBy('createdAt', 'desc')))
     const blogs = blogData.docs.map(doc => {
         return {...doc.data(), id: doc.id}
@@ -61,7 +61,7 @@ document.querySelector('.fileUpload').addEventListener('change',function getfile
 });
 
 document.querySelector('.uploadBtn').addEventListener('click', function uploadImage(e){   
-   const storageRef = sref(storage, 'Products/' + fileName);
+   const storageRef = sref(storage, 'images/' + fileName);
    let uploadTask = uploadBytesResumable(storageRef, fileItem);
 
     uploadTask.on("state_changed", (snapshot)=>{
@@ -83,15 +83,14 @@ document.querySelector('.uploadBtn').addEventListener('click', function uploadIm
                 const email = $('#email').value
                 const phoneNumber = $('#phoneNumber').value
                 const productName = $('#productName').value
-                const category = $('#category').value
-                const description = $('#description').value
+                const quantity = $('#productQuantity').value
                 const price = $('#price').value
                 const location = $('#location').value
                 const createdAt = new Date().toISOString();
                 
                 $('#productSale').textContent = 'submission in progress...'
                 // posting to db
-                await addDoc(collection(db, 'kejasearchproducts'), { email,phoneNumber, name, productName, category, description, price, location, createdAt, downloadURL })
+                await addDoc(collection(db, 'agroBiasharaProductSale'), { email,phoneNumber, name, productName, quantity, price, location, createdAt, downloadURL })
                 $('#productSale').textContent = 'submit'
                 alert('product created successfully')
             
@@ -101,15 +100,14 @@ document.querySelector('.uploadBtn').addEventListener('click', function uploadIm
                 $('#name').value = ''
                 $('#productName').value = ''
                 $('#preview').value = ''
+                $('#quantity').value = ''
                 $('#price').value = ''
-                $('#category').value = ''
-                $('#description').value = ''
                 $('#location').value = ''
                 $('#createdAt').value = ''
             })
             
             
-            onSnapshot(collection(db, 'kejasearchproducts'), function (data) {
+            onSnapshot(collection(db, 'agroBiasharaProductSale'), function (data) {
                 const blogs = data.docs.map((doc) => {
                     return {...doc.data(), id: doc.id}
                 })
