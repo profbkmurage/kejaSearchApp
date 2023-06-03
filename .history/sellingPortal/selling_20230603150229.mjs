@@ -144,7 +144,7 @@ function renderBlogs(blogs) {
     </div>
     <hr>
     <div class="d-flex align-items-center justify-content-center bg-primary mt-2">
-      <h6 class=" text-light ml-2">${new Date(blog.createdAt).toDateString()}</h6>
+      <h6 class=" text-light ml-2">${blog.createdAt}</h6>
     </div>
   </div>
 </div>
