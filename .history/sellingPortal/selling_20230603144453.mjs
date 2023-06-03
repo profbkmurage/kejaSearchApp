@@ -82,6 +82,7 @@ document.querySelector('.uploadBtn').addEventListener('click', function uploadIm
                 const name = $('#name').value
                 const email = $('#email').value
                 const phoneNumber = $('#phoneNumber').value
+                const productName = $('#productName').value
                 const category = $('#category').value
                 const description = $('#description').value
                 const price = $('#price').value
@@ -90,7 +91,7 @@ document.querySelector('.uploadBtn').addEventListener('click', function uploadIm
                 
                 $('#productSale').textContent = 'submission in progress...'
                 // posting to db
-                await addDoc(collection(db, 'kejasearchproducts'), { email, phoneNumber, name, category, description, price, location, createdAt, downloadURL })
+                await addDoc(collection(db, 'kejasearchproducts'), { email, phoneNumber, name, productName, category, description, price, location, createdAt, downloadURL })
                 $('#productSale').textContent = 'submit'
                 alert('product created successfully')
             
